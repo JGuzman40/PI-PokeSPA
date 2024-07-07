@@ -1,17 +1,16 @@
 # PI-PokeSPA
 
-My Pokémon SPA
+Pokémon SPA es una aplicación de página única (SPA) desarrollada con React y Vite que permite a los usuarios explorar y buscar información detallada sobre Pokémon utilizando la PokeAPI. 
 
 
-Este es un proyecto de una Single Page Application (SPA) para buscar Pokémon utilizando la PokeAPI. La aplicación está desarrollada con React y Vite para el frontend, y Node.js, Express y Sequelize para el backend.
+Esta aplicación utiliza Redux para el manejo del estado global y React Router Dom para la navegación entre las distintas vistas.
 
-Funcionalidades
+## Características Principales
 
-Búsqueda de Pokémon: Permite buscar Pokémon por nombre.
-
-Detalles de Pokémon: Muestra detalles como habilidades, tipo y estadísticas del Pokémon seleccionado.
-
-Captura de Pokémon: Simula la captura de Pokémon utilizando la aplicación.
+Exploración de Pokémon: Busca y explora detalles completos de Pokémon, incluyendo estadísticas, habilidades y tipos.
+Estado Global: Gestión eficiente del estado de la aplicación mediante Redux, permitiendo una experiencia de usuario fluida y sin interrupciones.
+Navegación Dinámica: Utiliza React Router Dom para una navegación intuitiva y dinámica entre las diferentes vistas de la aplicación.
+Estilos Personalizados: Integración de Sass para estilos personalizados y una apariencia visualmente atractiva.
 
 ## Tecnologías
 
