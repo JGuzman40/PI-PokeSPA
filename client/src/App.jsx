@@ -1,30 +1,31 @@
-import { useState } from 'react'
-import pokemonLogo from './assets/pokemon-23.svg'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from './components/LandingPage/LandingPage';
+import HomePage from './components/HomePage/HomePage';
+import DetailPage from './components/DetailPage/DetailPage';
+import NavBar from './components/NavBar/NavBar';
+import './styles/global.scss';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        
-          <img src={pokemonLogo} className="logo" alt="poke logo" />
-      </div>
-      <h1>Poke SPA</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Somos Henry
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Jesu Guzman
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomeWithNavBar />} />
+        <Route path="/pokemon/:id" element={<DetailPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+function HomeWithNavBar() {
+  return (
+    <>
+      <NavBar />
+      <HomePage />
+    </>
+  );
+}
+
+export default App;
+

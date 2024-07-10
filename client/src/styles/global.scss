@@ -1,0 +1,29 @@
+// global.scss
+@import 'variables';
+@import 'mixins';
+
+// Estilos globales
+body {
+  font-family: $body-font;
+  color: $text-color;
+  background-color: $background-color;
+  margin: 0;
+  padding: $spacing-medium;
+}
+
+// Media queries para ajustar el diseño en diferentes tamaños de pantalla
+@media (max-width: 768px) {
+  .card {
+    padding: $spacing-small;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: $spacing-small;
+  }
+}
+
+
+
+
