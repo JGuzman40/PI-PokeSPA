@@ -1,0 +1,82 @@
+.searchbar-container {
+    display: flex;
+    width: 86%;
+    margin: 10px 10px;
+    flex-direction: column;
+    align-items:flex-start;
+    padding: 1rem;
+    background-color: $primary-color;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    @include responsive-layout(768px)
+  }
+  
+  form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    @include responsive-layout(768px)
+  }
+  
+  .search-input {
+    background-color: $primary-color;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  
+    &:focus {
+      border-color: $secondary-color;
+    }
+  
+    &::placeholder {
+        background-color: $primary-color;
+      color: $secondary-color;
+    }
+  }
+  
+  .search-button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    color: $secondary-color;
+    background-color: #09427f;
+    border: 1px solid #ccc;;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #a6c6e8;
+    }
+  }
+  
+  .filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    @include responsive-layout(768px) 
+    }
+  
+
+  
+  .filter-select {
+    background-color: $primary-color;
+    color: $secondary-color;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+  
+    &:focus {
+      border-color: $primary-color;
+    }
+  }
+
+  

@@ -2,7 +2,12 @@
 // Colores
 $primary-color: #050505;
 $secondary-color: #f4f5fa;
-$background-color: #535253;
+$background-color: linear-gradient(
+    to left, 
+    rgb(5, 212, 254) 0%,
+    rgb(9, 40, 155) 100%,
+
+);
 $text-color: #696d69;
 
 // Fuentes y Tamaños

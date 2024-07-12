@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    @include responsive-layout(768);
   
     h1 {
       color: $text-color;

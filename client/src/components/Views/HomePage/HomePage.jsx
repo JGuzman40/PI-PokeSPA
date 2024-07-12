@@ -1,10 +1,16 @@
+
+import Cards from '../../Cards/Cards';
+import NavBar from '../../NavBar/NavBar';
+import SearchBar from '../../SearchBar/SearchBar';
+
 import './HomePage.scss'; // Asegúrate de tener estilos para esta página
 
 const HomePage = () => {
   return (
     <div className="home-page">
-      <h1>Aquí está la HomePage</h1>
-      {/* Aquí es donde más tarde agregaremos el SearchBar, listado de Pokémon, etc. */}
+      <NavBar />
+      <SearchBar />
+      <Cards />
     </div>
   );
 };

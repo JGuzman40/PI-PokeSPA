@@ -1,29 +1,20 @@
 // src/App.jsx
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage/LandingPage';
-import HomePage from './components/HomePage/HomePage';
-import DetailPage from './components/DetailPage/DetailPage';
-import NavBar from './components/NavBar/NavBar';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './components/Views/LandingPage/LandingPage';
+import HomePage from './components/Views/HomePage/HomePage';
+import DetailPage from './components/Views/DetailPage/DetailPage';
+import CreatePage from './components/Views/CreatePage/CreatePage';
+
 import './styles/global.scss';
 
 function App() {
   return (
-    <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<HomeWithNavBar />} />
-        <Route path="/pokemon/:id" element={<DetailPage />} />
+        <Route excat path="/home" element={<HomePage />} />
+        <Route path="/home/:id" element={<DetailPage />} />
+        <Route path="/create" element={<CreatePage />} />
       </Routes>
-    </Router>
-  );
-}
-
-function HomeWithNavBar() {
-  return (
-    <>
-      <NavBar />
-      <HomePage />
-    </>
   );
 }
 

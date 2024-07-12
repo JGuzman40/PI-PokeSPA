@@ -13,11 +13,12 @@
   // Mixin para tamaños responsivos
   @mixin responsive-layout($breakpoint) {
     @media (max-width: $breakpoint) {
-      width: 100%;
+      flex-direction: column;
+      width:80%;
       padding: $spacing-small;
     }
   }
   
-  // Otros mixins según necesites
+
   
   

@@ -1,20 +1,26 @@
 import { Link } from 'react-router-dom';
-import './NavBar.scss'; // Importa estilos de la NavBar
 
-const NavBar = () => {
-  return (
-    <nav className="navbar">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">Landing Page</Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/home" className="nav-link">Home</Link>
-        </li>
-        {/* Añade más enlaces según tus necesidades */}
-      </ul>
-    </nav>
-  );
-};
+import './NavBar.scss';
+
+function NavBar() {
+    return (
+        <nav className='navbar'>
+            <ul className='navbar-nav'>
+                <li className='nav-item'>
+                    <Link to="/home" className='nav_link'>Home</Link>
+                </li>
+                <li>
+                    <Link to="/home/:id" className='nav_link'>Detail</Link>
+                </li>
+                <li>
+                    <Link to="/create" className='nav_link'>Crear</Link>
+                </li>
+                <li>
+                    <Link to="/" className='nav_link'>Salir</Link>
+                </li>
+                </ul>            
+        </nav>
+    )
+}
 
 export default NavBar;
