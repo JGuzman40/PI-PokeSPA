@@ -9,11 +9,39 @@ body {
   background: $background-color;
   margin: 0;
   padding: $spacing-medium;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $body-font;
+  color: $text-color;
+}
+
+// enlaces
+a {
+  color: $secondary-color;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color:lighten($secondary-color, 10%);
+  }
+}
+
+// Contenedor general
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-medium;
 }
 
 // Media queries para ajustar el diseño en diferentes tamaños de pantalla
 @media (max-width: 768px) {
-  .card {
+  .body {
+    padding: $spacing-small;
+  }
+
+  .container {
     padding: $spacing-small;
   }
 }
@@ -23,17 +51,8 @@ body {
     padding: $spacing-small;
   }
 
-  .cards-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .navbar {
-    flex-direction: column; // Ajusta la dirección de la navbar
-    align-items: flex-start;
-  }
-  
-  .searchbar-container {
-    width: 100%; // Asegúrate de que ocupe todo el ancho
+  .container {
+    padding: $spacing-small;
   }
 }
 

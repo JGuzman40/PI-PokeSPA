@@ -1,39 +1,52 @@
+@import '../../styles/variables.scss';
+
 .navbar {
-    width: 85%;
-    background-color: $primary-color;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 25px;
-    font-family: $body-font;
-    border-radius: 8px;
-  }
+  background-color: $primary-color; // Color negro
+  width:85%;
+  padding: 1rem 2rem; // Espaciado interno
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Sombra sutil
+  border-radius: $border-radius; // Bordes redondeados
   
+
   .navbar-nav {
     display: flex;
-    justify-content:flex-end;
+    justify-content: flex-end; // Espaciado igual entre los elementos
     list-style: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .nav-item {
-    margin: 0 1rem;
-  }
-  
-  .nav_link {
-    color: #0294fc;
-    text-decoration: none;
-    font-size: 1rem;
-    padding: 0.5rem;
-    transition: color 0.3s ease, background-color 0.3s ease;
-  
-    &:hover {
-      color: #fff;
-      background-color: #49017f;
+    
+    .nav-item {
+      margin: 10px 10px;
+      border-radius: $border-radius;
+      
+      .nav_link {
+        color: $secondary-color; 
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        transition: color 0.3s ease, background-color 0.3s ease;
+        border-radius: $border-radius;
+        
+        &:hover {
+          color: $primary-color; 
+          background-color: $secondary-color; 
+        }
+        
+        &.active {
+          color: $primary-color; 
+          background-color: $secondary-color; 
+        }
+      }
     }
-  
-    &.active {
-      color: #fff;
-      background-color: #5faafb;
+  }
+}
+
+// Media queries para ajustar el diseño en diferentes tamaños de pantalla
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem; // Reducir el espaciado interno en pantallas pequeñas
+    .navbar-nav {
+      flex-direction: row; // Alinear los elementos verticalmente en pantallas pequeñas
     }
   }
-  
+}

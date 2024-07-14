@@ -15,7 +15,7 @@ server.use(morgan('dev'));
 
 // Configuración CORS
 server.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:5173',
   credentials: true, // Habilita el uso de cookies y encabezados personalizados
 }));
 

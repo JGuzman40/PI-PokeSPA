@@ -9,13 +9,13 @@ function NavBar() {
                 <li className='nav-item'>
                     <Link to="/home" className='nav_link'>Home</Link>
                 </li>
-                <li>
+                <li className='nav-item'>
                     <Link to="/home/:id" className='nav_link'>Detail</Link>
                 </li>
-                <li>
+                <li className='nav-item'>
                     <Link to="/create" className='nav_link'>Crear</Link>
                 </li>
-                <li>
+                <li className='nav-item'>
                     <Link to="/" className='nav_link'>Salir</Link>
                 </li>
                 </ul>            

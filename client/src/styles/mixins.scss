@@ -1,11 +1,5 @@
 // mixins.scss
-
-@mixin center-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+ 
   @mixin rounded-border($radius: 4px) {
     border-radius: $radius;
   }
@@ -13,9 +7,7 @@
   // Mixin para tamaños responsivos
   @mixin responsive-layout($breakpoint) {
     @media (max-width: $breakpoint) {
-      flex-direction: column;
-      width:80%;
-      padding: $spacing-small;
+      @content;
     }
   }
   

@@ -1,9 +1,15 @@
 .cards_container {
     background-color: $primary-color;
-    width: 85vw;
-    margin: 0 auto;
+    width: 85%;
+    justify-content: center;
     display: flex;
-    flex-direction: row;
-    border-radius: 25px;
-    @include responsive-layout(768px);
+    flex-wrap: wrap;
+    gap: $spacing-medium;
+    border-radius: $border-radius;
+    padding: $spacing-medium;
+
+    @include responsive-layout(768px){
+        width: 100%;
+        padding: $spacing-small;
+    }
 }

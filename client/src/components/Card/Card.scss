@@ -1,19 +1,55 @@
 .card_container {
     display: flex;
-    width: 25%;
     flex-direction: column;
-    background-color: black;
-    border: 2px solid beige;
-    border-radius: 8%;
-    padding: 25px;
-    margin: 25px 15px;
+    background-color: $primary-color; // Negro
+    border: 1px solid $secondary-color; // Gris claro
+    border-radius: $border-radius; // Usar la variable global
+    padding: 5%; // Espaciado
+    margin: $spacing-small;
+    width: 20%;
     cursor: pointer;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translate(0);
-    transition: transform 0.50s ease-out;
-    @include responsive-layout(768px)
-}
-
-.card_container:hover {
-    transform: scale(1.05);
-}
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Transición más rápida
+    
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Agregar sombra al pasar el cursor
+    }
+    
+    // Estilos responsivos
+    @include responsive-layout(768px) {
+      width: 150px; // Ajustar el ancho
+    }
+    
+    @include responsive-layout(480px) {
+      width: 120px; // Ajustar el ancho para pantallas muy pequeñas
+    }
+  }
+  
+  .pokemon_stats {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  
+  .pokemon_image {
+    width: 100%;  // Hace que la imagen ocupe todo el ancho del contenedor
+    height: auto; // Mantiene la proporción de la imagen
+    border-radius: 4px;
+  }
+  
+  .pokemon_types {
+    margin: $spacing-small 0;
+  }
+  
+  .pokemon_type {
+    display: inline-block;
+    background-color: $secondary-color; // Gris claro
+    color: $primary-color;
+    border-radius: $border-radius; // Usar la variable global
+    padding: 4px 8px;
+    margin: 4px;
+    font-size: 14px;
+  }
+  
