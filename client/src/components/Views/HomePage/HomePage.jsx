@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPokemons } from '../../../redux/actions';
+import { getPokemons, getPokeByName } from '../../../redux/actions';
 
 
 import Cards from '../../Cards/Cards';
@@ -13,6 +13,20 @@ const HomePage = () => {
 
   const dispatch = useDispatch()
   const allPokemons = useSelector((state) => state.allPokemons);
+  const [searchByName, setSearchByName] = useState("");
+
+  function handleChange(e) {
+    e.preventDefault();
+    setSearchByName(e.target.value)
+  }
+
+  // para buscar por nombre
+  function handleSubmit(e) {
+    e.preventDefault()
+    const searchNameLowerCase = searchByName.toLowerCase();
+    dispatch(getPokeByName(searchNameLowerCase));
+  }
+
 
   useEffect(()=> {
     dispatch(getPokemons())
@@ -25,7 +39,7 @@ const HomePage = () => {
     <div className='homepage'>
 
       <NavBar />
-      <SearchBar />
+      <SearchBar handleChange={handleChange} handleSubmit={handleSubmit} />
       <Cards allPokemons ={limitedPokes} />
     </div>
   );

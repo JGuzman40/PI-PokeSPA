@@ -1,25 +1,26 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './Card.scss';
+
+const captitalizarName = (name) => {
+    return name.charAt(0).toUpperCase() +
+    name.slice(1).toLowerCase();
+};
 
 function Card({ pokemon }) {
     return (
+        <Link to={`/home/${pokemon.id}`}>
         <div className='card_container'>
-            <h1>{pokemon.name}</h1>
+            <h1>{captitalizarName(pokemon.name)}</h1>
             <img src={pokemon.imagen} alt={pokemon.name} className='pokemon_image' />
-            <div className='pokemon_stats'>
-                <p><strong>Vida:</strong> {pokemon.vida}</p>
-                <p><strong>Ataque:</strong> {pokemon.ataque}</p>
-                <p><strong>Defensa:</strong> {pokemon.defensa}</p>
-                <p><strong>Velocidad:</strong> {pokemon.velocidad}</p>
-                <p><strong>Altura:</strong> {pokemon.altura} m</p>
-                <p><strong>Peso:</strong> {pokemon.peso} kg</p>
-            </div>
+            
             <div className='pokemon_types'>
                 {pokemon.types.map((type, index) => (
                     <span key={index} className='pokemon_type'>{type.tipo}</span>
                 ))}
             </div>
         </div>
+        </Link>
     );
 }
 

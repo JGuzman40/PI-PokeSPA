@@ -1,15 +1,17 @@
+import PropTypes from 'prop-types';
 import './SearchBar.scss';
 
-function SearchBar() {
+function SearchBar({ handleChange, handleSubmit}) {
     return (
         <div className="searchbar-container">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
                     id="pokemon-search"
                     name="pokemon-search"
                     placeholder="Busca tu pokemon por nombre completo" 
                     className="search-input"
+                    onChange={handleChange}
                 />
                 <button 
                     type="submit" 
@@ -54,5 +56,12 @@ function SearchBar() {
         </div>
     );
 }
+
+SearchBar.propTypes ={
+    handleChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+}
+
+
 
 export default SearchBar;

@@ -44,7 +44,7 @@ const getAllPokemons = async (name, searchType) => {
 
     if (name) {
       // Si se proporciona el name, configura el filtro para buscar por name
-      filter = { where: { name: { [Sequelize.Op.like]: `%${name}%` },}, };
+      filter = { where: { name: { [Sequelize.Op.iLike]: `%${name}` },}, };
     }
 
     // Realiza una consulta para obtener todos los Pokémon de la base de datos
@@ -79,7 +79,7 @@ const getAllPokemons = async (name, searchType) => {
 
     if (searchType === 'name' && name) {
       // Si se está buscando por name y se proporciona un name, filtra por name
-      combinedPokemons = combinedPokemons.filter(pokemon => pokemon.name.includes(name));
+      combinedPokemons = combinedPokemons.filter(pokemon => pokemon.name.includes(name.toLowerCase()));
     }
 
     return combinedPokemons;

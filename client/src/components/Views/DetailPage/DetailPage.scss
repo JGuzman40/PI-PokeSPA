@@ -1,12 +1,53 @@
+
 .detail-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 50px 50px;
+  align-items: center;
+  width: 70%;
+  background-color: $primary-color; 
+  border-radius: $border-radius;
+  margin: 20px 150px;
+
+  @media (max-width: 768) {
+    padding: 10px;
+  }
+
+  .pokemon-detail-image {
+    max-width: 250px; // Limitar el tamaño de la imagen
+    border-radius: 10px; // Bordes redondeados
+    margin-bottom: 20px; // Espacio debajo de la imagen
+  }
+
+  p {
+    font-family: $body-font;
+    font-size: $base-font-size; // Tamaño de fuente estándar para los detalles
+    font-weight: bolder;
+    color: $secondary-color;
     justify-content: center;
-    height: 100vh;
-  
-    h1 {
-      color: $text-color;
-      font-size: $base-font-size;
+  }
+
+  .pokemon-detail-types {
+    margin: 10px 10px;
+
+    .pokemon-detail-type {
+      display: inline-block;
+      background-color: $secondary-color; // Gris claro
+      color: $primary-color;
+      border-radius: $border-radius; // Usar la variable global
+      padding: 4px 8px;
+      margin: 10px;
+      font-size: 14px;
     }
   }
+
+  .pokemon_stats {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    //justify-content:center;
+    width: 200px;
+    margin: 25px;
+  }
+}
+
