@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-export const GET_POKEMONS = "GET_POKEMONS"
-export const GET_POKE_BY_NAME = "GET_POKE_BY_NAME"
-export const GET_POKE_ID_DETAIL = "GET_POKE_ID_DETAIL"
+export const GET_POKEMONS = "GET_POKEMONS";
+export const GET_POKE_BY_NAME = "GET_POKE_BY_NAME";
+export const GET_POKE_ID_DETAIL = "GET_POKE_ID_DETAIL";
+
+export const SET_TYPE_SUCCESS = "SET_TYPE_SUCCESS";
+export const SET_ORIGIN_FILTER = "SET_ORIGIN_FILTER";
+export const SET_SORT_ORDER = "SET_SORT_ORDER";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const LOAD_TYPES_SUCCESS = "LOAD_TYPES_SUCCESS";
 
 
 let BASE_URL = "http://localhost:3001"
@@ -38,3 +44,34 @@ export function getPokeIdDetail(id) {
         })
     }
 }
+
+export function loadTypesSuccess() {
+    return async function(dispatch) {
+        const response = await axios.get(`${BASE_URL}/types`);
+        dispatch({
+            type: "LOAD_TYPES_SUCCESS",
+            payload: response.data,
+        });
+    };
+}
+
+export const setTypeFilter = (type) => ({
+    type: "SET_TYPE_SUCCESS",
+    payload: type,
+});
+
+export const setOriginFilter = (origin) => ({
+    type: "SET_ORIGIN_FILTER",
+    payload: origin,
+});
+
+export const setSortOrder = (order) => ({
+    type: "SET_SORT_ORDER",
+    payload: order,
+});
+
+export const setCurrentPage = (page) => ({
+    type: "SET_CURRENT_PAGE",
+    payload: page,
+});
+

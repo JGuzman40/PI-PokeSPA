@@ -3,12 +3,11 @@ import Card from '../Card/Card';
 
 import './Cards.scss';
 
-function Cards({ allPokemons }) {
-const pokemonList = allPokemons
+function Cards({ pokemons }) {
     
     return (
         <div className='cards_container'>
-            {pokemonList?.map((pokemon) => (
+            {pokemons?.map((pokemon) => (
                 <Card key={pokemon.id} pokemon={pokemon} />
             ))}           
         </div>
@@ -17,7 +16,7 @@ const pokemonList = allPokemons
 
 
 Cards.propTypes = {
-    allPokemons: PropTypes.arrayOf(
+    pokemons: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, // Aceptar string o number
         name: PropTypes.string.isRequired,

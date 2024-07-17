@@ -1,0 +1,27 @@
+
+.filter-container {
+    display: flex;
+    gap: 1rem; // Espaciado entre los selectores
+    flex-wrap: wrap;
+
+    .filter-select {
+      padding: 0.5rem;
+      border: 1px solid $secondary-color;
+      border-radius: $border-radius;
+      background-color: $primary-color;
+      color: $secondary-color;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: $secondary-color;
+        outline: none;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+      .filter-container {
+        flex-direction: column;
+      }
+    }

@@ -1,5 +1,5 @@
 .searchbar-container {
-  background-color: $primary-color; // Fondo negro
+  //background-color: $primary-color; // Fondo negro
   max-width: 80%;
   padding: 20px;
   border-radius: $border-radius;
@@ -51,29 +51,9 @@
     }
   }
 
-  .filter-container {
-    display: flex;
-    gap: 1rem; // Espaciado entre los selectores
-    flex-wrap: wrap;
-
-    .filter-select {
-      padding: 0.5rem;
-      border: 1px solid $secondary-color;
-      border-radius: $border-radius;
-      background-color: $primary-color;
-      color: $secondary-color;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-
-      &:focus {
-        border-color: $secondary-color;
-        outline: none;
-      }
-    }
-  }
 }
 
-// Media queries para ajustar el diseño en diferentes tamaños de pantalla
+
 @media (max-width: 768px) {
   .searchbar-container {
     padding: 0.5rem;

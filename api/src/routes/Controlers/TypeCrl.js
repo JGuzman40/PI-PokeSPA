@@ -1,27 +1,20 @@
 const axios = require('axios');
-const { Type } = require('../../db');
+const { Type } = require('../../db'); // Ajusta la ruta según la estructura de tu proyecto
 
 const getAllTypes = async () => {
   try {
-    const contentTypeTester = await Type.findAll();
-
-    if (contentTypeTester.length === 0) {
+    // Verificar si ya hay tipos en la base de datos
+    const existingTypes = await Type.findAll();
+    if (existingTypes.length === 0) {
+      // Obtener tipos desde la API
       const apiTypes = await axios.get('https://pokeapi.co/api/v2/type');
       const typesFromAPI = apiTypes.data.results;
 
-      // Array para almacenar las promesas de solicitudes individuales
-      const typePromises = typesFromAPI.map((type) => axios.get(type.url));
+      // Preparar datos para guardar en la base de datos
+      const typesToSave = typesFromAPI.map(type => ({ name: type.name }));
 
-      // Esperar a que todas las promesas se resuelvan
-      const typeDetailsResponses = await Promise.all(typePromises);
-
-      // Extraer la información necesaria de cada respuesta
-      const detailedTypes = typeDetailsResponses.map((response) => ({
-        name: response.data.name,
-      }));
-
-      // Guardar los tipos en la base de datos
-      await Type.bulkCreate(detailedTypes);
+      // Guardar tipos en la base de datos
+      await Type.bulkCreate(typesToSave);
     }
 
     // Obtener todos los tipos de la base de datos
@@ -33,4 +26,5 @@ const getAllTypes = async () => {
 };
 
 module.exports = { getAllTypes };
+
 
