@@ -7,6 +7,10 @@ import {
     SET_SORT_ORDER,
     SET_CURRENT_PAGE,
     LOAD_TYPES_SUCCESS, 
+    CREATE_POKEMON_REQUEST,
+    CREATE_POKEMON_SUCCESS,
+    CREATE_POKEMON_FAILURE,
+
 } from "./actions";
 
 let initialState = {
@@ -18,6 +22,9 @@ let initialState = {
     sortOrder: 1,
     currentPage: 1,
     types:[],
+    creatingPokemon: false,
+    createdPokemon: null,
+    createPokemonError: null,
 };
 
 
@@ -72,8 +79,31 @@ function rootReducer(state = initialState, action){
                 currentPage: action.payload,
             }
 
+        case CREATE_POKEMON_REQUEST:
+            return{
+                ...state,
+                creatingPokemon: true,
+                createPokemonError: null,
+            }
+        
+        case CREATE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                creatingPokemon: false,
+                createdPokemon: action.payload,
+                createPokemonError: null,
+            }
+
+        case CREATE_POKEMON_FAILURE:
+            return {
+                ...state,
+                creatingPokemon: false,
+                createdPokemon: null,
+                createPokemonError: action.payload,
+            }
+
         default:
-            return state
+            return state;
     }
 }
 

@@ -10,6 +10,9 @@ export const SET_SORT_ORDER = "SET_SORT_ORDER";
 export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const LOAD_TYPES_SUCCESS = "LOAD_TYPES_SUCCESS";
 
+export const CREATE_POKEMON_REQUEST = "CREATE_POKEMON_REQUEST"; 
+export const CREATE_POKEMON_SUCCESS = "CREATE_POKEMON_SUCCESS";
+export const CREATE_POKEMON_FAILURE = "CREATE_POKEMON_FAILURE";
 
 let BASE_URL = "http://localhost:3001"
 
@@ -22,6 +25,29 @@ export function getPokemons(){
             payload: response.data,
         });
     };
+}
+
+export function createPokemon(pokemonData) {
+    return async function(dispatch) {
+        dispatch({ 
+            type: "CREATE_POKEMON_REQUEST"
+        })
+
+        try {
+            const response = await axios.post(`${BASE_URL}/pokemon`, pokemonData);
+            dispatch({
+                type: "CREATE_POKEMON_SUCCESS",
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            dispatch({
+                type: "CREATE_POKEMON_FAILURE",
+                payload: error.message
+            });
+            throw error;
+        }
+    }
 }
 
 export function getPokeByName(name){
