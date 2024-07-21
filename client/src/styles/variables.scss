@@ -4,6 +4,8 @@ $primary-color: #050505;
 $secondary-color: #f0f0f0;
 $background-color: #023a68;
 $text-color: #e0e0e0;
+$input-background: $primary-color;
+$input-text-color: #787d82;
 
 // Fuentes y Tamaños
 $body-font: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -17,5 +19,7 @@ $max-width: 1280px;
 
 // Otros
 $border-radius: 25px;
+
+
 
 

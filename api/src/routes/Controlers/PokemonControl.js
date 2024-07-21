@@ -122,7 +122,14 @@ const getPokemonById = async (id, source) => {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
       pokemon = response.data;
     } else {
-      pokemon = await Pokemon.findByPk(id, {include: 'Types'}); //registros DB asociados con tipos
+      pokemon = await Pokemon.findByPk(id, {
+        include: {
+          model: Type,
+          as: 'Types',
+          attributes: ['name'],
+          through: { attributes: []}
+        } 
+      }); 
     }
 
     let typesData = [];
@@ -132,7 +139,7 @@ const getPokemonById = async (id, source) => {
       }
     } else {
       if (pokemon.Types && Array.isArray(pokemon.Types)) { // Ajusta a pokemon.Types para registros DB
-        typesData = pokemon.Types.map((type) => ({ tipo: type.tipo}));
+        typesData = pokemon.Types.map((type) => ({ tipo: type.name}));
       }
     }
 

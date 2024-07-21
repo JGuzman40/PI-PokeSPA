@@ -1,87 +1,120 @@
 .form-container {
+  background-color: $primary-color;
+  color: $text-color;
+  font-family: $body-font;
+  max-width: 85%;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+// Estilos para el título del formulario
+.form-container h2 {
+  font-size: 2em;
+  margin-bottom: $spacing-medium;
+  text-align: center;
+}
+
+// Estilos para el mensaje de éxito
+.success-message {
+  color: #28a745;
+  font-size: 1.2em;
+  margin-bottom: $spacing-medium;
+  text-align: center;
+}
+
+// Estilos para los botones
+button {
+  background-color: $secondary-color;
+  color: $primary-color;
+  border: none;
+  padding: $spacing-small $spacing-medium;
+  font-size: 1em;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    color: $secondary-color;
+  }
+}
+
+// Estilos para los campos del formulario
+form {
   display: flex;
   flex-direction: column;
+  gap: $spacing-medium;
   align-items: center;
-  background-color: $primary-color;
-  border: 1px solid $secondary-color;
-  border-radius: $border-radius;
-  padding: 20px;
-  margin: 20px;
-  max-width: 400px;
-  color: #fff; // Texto blanco para contraste
 
-  h2 {
-    margin-bottom: 20px;
+  div {
+    display: flex;
+    //flex-direction: column;
+    align-items: center; // Alinea elementos en el centro
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  label {
+    font-size: 1em;
+    margin: $spacing-medium;
+  }
 
-    div {
-      margin-bottom: 15px;
+  input[type="text"],
+  input[type="number"] {
+    background-color: $input-background;
+    max-width: 60%;
+    color: $input-text-color;
+    border: 1px solid $secondary-color;
+    padding: $spacing-small;
+    border-radius: $border-radius;
+    font-size: 1em;
+
+    &:focus {
+      border-color: lighten($secondary-color, 20%);
+      outline: none;
+    }
+  }
+
+  .error-message {
+    color: #ff0000;
+    font-size: 0.9em;
+    margin: 10px 10px;
+  }
+}
+
+// Estilos específicos para el contenedor de tipos
+.type-container {
+  display: flex;
+  flex-wrap: wrap; // Permite que los elementos se envuelvan si no caben en una línea
+  //gap: $spacing-small; // Espacio entre los elementos
+
+  div {
+    display: flex;
+    flex-direction: row-reverse;
+   // align-items: center;
+    //margin-bottom: $spacing-small;
+
+    input[type="checkbox"] {
+      margin-right: $spacing-small;
     }
 
     label {
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 10px;
-      border-radius: $border-radius;
-      border: 1px solid $secondary-color;
-      background-color: #fff;
-      color: $primary-color;
-    }
-
-    .type-container {
-      display: flex;
-      flex-wrap: wrap;
-
-      div {
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
-        margin-bottom: 5px;
-
-        input[type="checkbox"] {
-          margin-right: 5px;
-        }
-
-        label {
-          color: $secondary-color;
-          font-size: 14px;
-        }
-      }
-    }
-
-    button[type="submit"] {
-      padding: 10px 20px;
-      background-color: $secondary-color;
-      color: $primary-color;
+      background-color: $primary-color;
+      margin: 10px 10px;
+      color: $secondary-color;
       border: none;
-      border-radius: $border-radius;
+      padding: 8px 8px;
+      font-size: 14px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: background-color 0.3s;
 
       &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      background-color: darken($secondary-color, 10%);
+      color: $primary-color;
       }
-    }
-
-    .error-message {
-      color: red;
-      font-size: 14px;
-    }
-
-    .success-message {
-      color: green;
-      font-size: 14px;
     }
   }
 }
+
+

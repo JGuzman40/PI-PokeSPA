@@ -8,6 +8,7 @@ const captitalizarName = (name) => {
 };
 
 function Card({ pokemon }) {
+    
     return (
         <Link to={`/home/${pokemon.id}`}>
         <div className='card_container'>

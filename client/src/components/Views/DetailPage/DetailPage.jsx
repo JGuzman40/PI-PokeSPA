@@ -15,8 +15,10 @@ const pokemon = useSelector(state => state.selectedPokemon );
 useEffect(()=> {
   dispatch(getPokeIdDetail(id));
 }, [dispatch, id]);
+
+console.log('Pokemon en DetailPage:', pokemon);
 if (!pokemon ) {
-  return <div>Loading...</div>;
+  return <div>Elige un Pokemon</div>;
 }
 
 
