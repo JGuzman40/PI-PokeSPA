@@ -97,13 +97,16 @@ const PokemonForm = () => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit}>
-                        {/* Campos del formulario */}
                         {Object.keys(formData).map((key) => (
                             key !== 'types' && (
                                 <div key={key}>
                                     <label htmlFor={key}>{key.charAt(0).toUpperCase() + key.slice(1)}:</label>
                                     <input
-                                        type={key === 'imagen' ? 'text' : 'number'}
+                                        type={
+                                            key === 'name' || key === 'imagen'
+                                            ? 'text' 
+                                            : 'number'
+                                        }
                                         id={key}
                                         name={key}
                                         value={formData[key]}

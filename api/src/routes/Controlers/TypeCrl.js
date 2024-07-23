@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Type } = require('../../db'); // Ajusta la ruta según la estructura de tu proyecto
+const { Type } = require('../../db');
 
 const getAllTypes = async () => {
   try {
