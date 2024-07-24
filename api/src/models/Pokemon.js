@@ -33,11 +33,11 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     altura: {
-      type: DataTypes.FLOAT, // Numero con decimales
+      type: DataTypes.FLOAT, 
       allowNull: true,
     },
     peso: {
-      type: DataTypes.FLOAT, // 
+      type: DataTypes.FLOAT, 
       allowNull: true,
     },
   },{timestamps: false});

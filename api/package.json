@@ -4,8 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -w src/tests/**/*.spec.js",
-    "start": "nodemon index.js"
+    "test": "cross-env NODE_ENV=test mocha -w src/tests/**/*.spec.js",
+    "test:models": "cross-env NODE_ENV=test mocha -w src/tests/models/**/*.spec.js",
+    "test:handlers": "cross-env NODE_ENV=test mocha -w src/tests/handlers/**/*.spec.js",
+    "test:routes": "cross-env NODE_ENV=test mocha -w src/tests/routes/**/*.spec.js",
+    "test:database": "cross-env NODE_ENV=test mocha -w src/tests/database/**/*.spec.js",
+    "start": "nodemon index.js",
+    "migrate": "sequelize-cli db:migrate",
+    "migrate:undo": "sequelize-cli db:migrate:undo"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +29,11 @@
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.1",
+    "supertest": "^7.0.0",
     "supertest-session": "^5.0.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "sequelize-cli": "^6.6.2"
   }
 }

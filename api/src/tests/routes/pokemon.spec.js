@@ -1,61 +1,56 @@
 const { expect } = require('chai');
-const session = require('supertest-session');
-const app = require('../../app');
-const { Pokemon, conn } = require('../../db');
+const supertest = require('supertest');
+const app = require('../../app'); 
+const request = supertest(app);
 
-const agent = session(app);
-const pokemon = {
-  name: 'Pikachu',
-};
+describe('Rutas de Pokémon', function () {
+  this.timeout(5000); 
 
-describe('Pokemon routes', () => {
-  let transaction; // Declara una variable para la transacción
+  it('GET /pokemon debería devolver una lista de Pokémon', async () => {
+    const response = await request.get('/pokemon');
+    expect(response.status).to.equal(200);
+    expect(response.body).to.be.an('array');
+  });
 
-  before(async () => {
-    try {
-      await conn.authenticate();
+  it('GET /pokemon/:id debería devolver un Pokémon por ID', async () => {
+    const response = await request.get('/pokemon/1'); 
+    expect(response.status).to.equal(200);
+    expect(response.body).to.have.property('id');
+  });
 
-      // Inicia una transacción antes de ejecutar las pruebas
-      transaction = await conn.transaction();
+  it('POST /pokemon debería crear un nuevo Pokémon', async () => {
+    const newPokemon = {
+      name: `Pikachu_${Date.now()}`,
+      imagen: 'http://example.com/pikachu.png',
+      vida: 35,
+      ataque: 55,
+      defensa: 40,
+      velocidad: 90,
+      altura: 0.4,
+      peso: 6,
+      tipos: ['electric']
+    };
 
-      await Pokemon.sync({ force: true, transaction });
-    } catch (err) {
-      console.error('Unable to connect to the database:', err);
+    const response = await request.post('/pokemon').send(newPokemon);
+    console.log('Response Status:', response.status); // Verifica el código de estado
+    console.log('Response Body:', response.body); // Verifica el contenido del cuerpo de la respuesta
+  
+    if (response.status === 201) {
+      expect(response.body).to.have.property('name', 'Jesuchu');
+    } else {
+      console.error('Error al crear el Pokémon:', response.body);
     }
   });
 
-  after(async () => {
-    // Deshacer la transacción después de que se ejecuten todas las pruebas
-    await transaction.rollback();
+  it('GET /pokemon debería devolver un error si no se encuentran Pokémon', async () => {
+    const response = await request.get('/pokemon?name=nonexistent');
+    expect(response.status).to.equal(404);
+    expect(response.body).to.have.property('error');
   });
 
-  afterEach(async () => {
-    try {
-      // Limpiar la base de datos después de cada prueba, pero dentro de la transacción
-      await Pokemon.destroy({
-        where: {},
-        truncate: true,
-        transaction,
-      });
-    } catch (error) {
-      console.error('Error clearing the database:', error);
-    }
-  });
-
-  describe('GET /pokemons', () => {
-    it('should get 200', async () => {
-      try {
-        // Crear un registro de Pokémon para probar dentro de la transacción
-        await Pokemon.create(pokemon, { transaction });
-
-        // Realizar la solicitud GET
-        const response = await agent.get('/pokemons');
-
-        // Verificar que se reciba una respuesta 200
-        expect(response.status).to.equal(200);
-      } catch (error) {
-        console.error('Error in test:', error);
-      }
-    });
+  it('GET /pokemon/:id debería devolver un error si el Pokémon no existe', async () => {
+    const response = await request.get('/pokemon/99999999-9999-9999-9999-999999999999');
+    expect(response.status).to.equal(400);
+    expect(response.body).to.have.property('error');
   });
 });

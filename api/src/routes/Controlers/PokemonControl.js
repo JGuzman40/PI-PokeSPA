@@ -132,6 +132,10 @@ const getPokemonById = async (id, source) => {
       }); 
     }
 
+    if(!pokemon) {
+      throw new Error('Pokemon no encontrado');
+    }
+
     let typesData = [];
     if (source === "api") {
       if (pokemon.types && Array.isArray(pokemon.types)) {

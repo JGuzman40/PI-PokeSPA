@@ -12,6 +12,9 @@ typeRouter.get("/", async (req, res) => {
   } catch (error) {
     res.status(400).json({error: `error on get / types: ${error.message}`})
   }
-})
+});
+typeRouter.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
 
 module.exports = typeRouter;
