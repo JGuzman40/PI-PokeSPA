@@ -90,7 +90,6 @@ const getAllPokemons = async (name, searchType) => {
 };
 
 
-
 const createPokemon = async (name, imagen, vida, ataque, defensa, velocidad, altura, peso, tipos) => {
   try {
     const existingPokemon = await Pokemon.findOne({ where: { name } });
@@ -111,7 +110,6 @@ const createPokemon = async (name, imagen, vida, ataque, defensa, velocidad, alt
     throw new Error('Error al crear el Pokémon: ' + error.message);
   }
 };
-
 
 
 const getPokemonById = async (id, source) => {
@@ -167,5 +165,36 @@ const getPokemonById = async (id, source) => {
   }
 };
 
+const updatePokemon = async (id, data) => {
+  try {
+    const pokemon = await Pokemon.findByPk(id);
+    if (!pokemon) {
+      throw new Error('Pokemon no encontrado');
+    }
+    await pokemon.update(data);
+    return pokemon;
+  } catch (error) {
+    throw new Error('Error al actualizar el pokemon: ' + error.message);
+  }
+};
 
-module.exports = { createPokemon, getPokemonById,  getAllPokemons };
+const deletePokemon = async (id) => {
+  try {
+    const pokemon = await Pokemon.findByPk(id);
+    if(!pokemon) {
+      throw new Error('Pokemon no encontrado');
+    }
+    await pokemon.destroy();
+    return { message: 'Pokemon elimienado exitosamente' };
+  } catch (error) {
+    throw new Error('Error al eliminar el pokemon: ' + error.message);
+  }
+}
+
+module.exports = { 
+  createPokemon, 
+  getPokemonById,  
+  getAllPokemons,
+  updatePokemon,
+  deletePokemon,
+ };

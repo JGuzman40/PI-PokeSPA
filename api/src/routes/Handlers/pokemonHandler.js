@@ -1,4 +1,4 @@
-const { createPokemon, getPokemonById, getAllPokemons } = require("../Controlers/PokemonControl");
+const { createPokemon, getPokemonById, getAllPokemons, deletePokemon, updatePokemon } = require("../Controlers/PokemonControl");
 
 const retryDelay = 1000;
 const maxRetries = 3;
@@ -84,9 +84,33 @@ const getPokemonIdHandler = async (req, res) => {
   }
 };
 
+const updatePokemonHandler = async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+  try {
+    const updatedPokemon = await updatePokemon(id, updateData);
+    return res.status(200).json(updatedPokemon);    
+  } catch (error) {
+    console.error('Update error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+const deletePokemonHandler = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await deletePokemon(id);
+    return res.status(200).json(result);  
+  } catch (error) {
+    return res.status(400).json({ error: error.message });
+  }
+}
 
 module.exports = {
   getPokemonHandler,
   getPokemonIdHandler,
-  createPokemonHandler
+  createPokemonHandler,
+  updatePokemonHandler,
+  deletePokemonHandler,
 };
