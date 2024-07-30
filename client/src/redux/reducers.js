@@ -10,25 +10,32 @@ import {
     CREATE_POKEMON_REQUEST,
     CREATE_POKEMON_SUCCESS,
     CREATE_POKEMON_FAILURE,
-
+    UPDATE_POKEMON_REQUEST,
+    UPDATE_POKEMON_SUCCESS,
+    UPDATE_POKEMON_FAILURE,
+    DELETE_POKEMON_REQUEST,
+    DELETE_POKEMON_SUCCESS,
+    DELETE_POKEMON_FAILURE,
 } from "./actions";
 
 let initialState = {
-    allPokemons:[],
+    allPokemons: [],
     pokemonsCopy: [],
     selectedPokemon: null,
-    typeFilter:"",
-    originFilter:"",
+    typeFilter: "",
+    originFilter: "",
     sortOrder: 1,
     currentPage: 1,
-    types:[],
+    types: [],
     creatingPokemon: false,
     createdPokemon: null,
-    createPokemonError: null,
+    updatePokemonError: null,
+    updatingPokemon: false,
+    deletingPokemon: false,
+    error: null
 };
 
-
-function rootReducer(state = initialState, action){
+function rootReducer(state = initialState, action) {
     switch(action.type) {
         case GET_POKEMONS:
             return {
@@ -80,7 +87,7 @@ function rootReducer(state = initialState, action){
             }
 
         case CREATE_POKEMON_REQUEST:
-            return{
+            return {
                 ...state,
                 creatingPokemon: true,
                 createPokemonError: null,
@@ -101,7 +108,53 @@ function rootReducer(state = initialState, action){
                 createdPokemon: null,
                 createPokemonError: action.payload,
             }
+        
+        case UPDATE_POKEMON_REQUEST:
+            return {
+                ...state,
+                updatingPokemon: true,
+                updatePokemonError: null,
+            }
 
+        case UPDATE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                updatingPokemon: false,
+                updatedPokemon: action.payload,
+                updatePokemonError: null,
+                allPokemons: state.allPokemons.map(pokemon =>
+                    pokemon.id === action.payload.id ? action.payload : pokemon
+                )
+            };
+
+        case UPDATE_POKEMON_FAILURE:
+            return {
+                ...state,
+                updatingPokemon: false,
+                updatePokemonError: action.payload,
+            };
+        
+        case DELETE_POKEMON_REQUEST:
+            return {
+                ...state,
+                deletingPokemon: true,
+                error: null,
+            };
+
+        case DELETE_POKEMON_SUCCESS:
+            return {
+                ...state,
+                deletingPokemon: false,
+                allPokemons: state.allPokemons.filter(pokemon => pokemon.id !== action.payload)
+            };
+
+        case DELETE_POKEMON_FAILURE:
+            return {
+                ...state,
+                deletingPokemon: false,
+                error: action.payload,
+            };
+            
         default:
             return state;
     }

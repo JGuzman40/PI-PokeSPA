@@ -26,7 +26,7 @@ const cleanArray = async () => {
         altura: e.data.height,
         peso: e.data.weight,
         types: e.data.types.map((type) => {
-          return { tipo: type.type.name };
+          return { name: type.type.name };
         }),};
     });
 
@@ -69,7 +69,7 @@ const getAllPokemons = async (name, searchType) => {
       const { Types, ...pokemonWithoutTypes } = pokemon.toJSON();
       return {
         ...pokemonWithoutTypes,
-        types: Types.map(type => ({ tipo: type.name })),
+        types: Types.map(type => ({ name: type.name })),
       };
     });
     
@@ -140,7 +140,7 @@ const getPokemonById = async (id, source) => {
         typesData = pokemon.types.map((type) => ({ tipo: type.type.name }));
       }
     } else {
-      if (pokemon.Types && Array.isArray(pokemon.Types)) { // Ajusta a pokemon.Types para registros DB
+      if (pokemon.Types && Array.isArray(pokemon.Types)) { 
         typesData = pokemon.Types.map((type) => ({ tipo: type.name}));
       }
     }
@@ -165,16 +165,44 @@ const getPokemonById = async (id, source) => {
   }
 };
 
-const updatePokemon = async (id, data) => {
+const updatePokemon = async (id, updates) => {
   try {
-    const pokemon = await Pokemon.findByPk(id);
+    const pokemon = await Pokemon.findByPk(id, {
+      include: {
+        model: Type,
+        as: 'Types',
+        attributes: ['name'],
+        through: { attributes: [] }
+      }
+    });
+
     if (!pokemon) {
-      throw new Error('Pokemon no encontrado');
+      throw new Error('Pokémon no encontrado');
     }
-    await pokemon.update(data);
-    return pokemon;
+
+    await pokemon.update(updates);
+
+    if (updates.types) {
+      const typeIds = await Promise.all(updates.types.map(async (type) => {
+        const typeRecord = await Type.findOne({ where: { name: type } });
+        return typeRecord.id;
+      }));
+      await pokemon.setTypes(typeIds);
+    }
+
+    // Obtener el Pokémon con los tipos actualizados
+    const updatedPokemon = await Pokemon.findByPk(id, {
+      include: {
+        model: Type,
+        as: 'Types',
+        attributes: ['name'],
+        through: { attributes: [] }
+      }
+    });
+
+    return updatedPokemon;
   } catch (error) {
-    throw new Error('Error al actualizar el pokemon: ' + error.message);
+    throw new Error('Error al actualizar el Pokémon: ' + error.message);
   }
 };
 

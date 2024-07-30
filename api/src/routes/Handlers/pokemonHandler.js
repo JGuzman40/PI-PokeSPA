@@ -86,16 +86,15 @@ const getPokemonIdHandler = async (req, res) => {
 
 const updatePokemonHandler = async (req, res) => {
   const { id } = req.params;
-  const updateData = req.body;
+  const updates = req.body;
+
   try {
-    const updatedPokemon = await updatePokemon(id, updateData);
-    return res.status(200).json(updatedPokemon);    
+    const updatedPokemon = await updatePokemon(id, updates);
+    return res.status(200).json(updatedPokemon);
   } catch (error) {
-    console.error('Update error:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(400).json({ error: error.message });
   }
 };
-
 
 const deletePokemonHandler = async (req, res) => {
   const { id } = req.params;

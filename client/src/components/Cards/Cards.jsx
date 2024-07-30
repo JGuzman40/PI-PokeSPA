@@ -29,7 +29,7 @@ Cards.propTypes = {
         peso: PropTypes.number.isRequired,
         types: PropTypes.arrayOf(
           PropTypes.shape({
-            tipo: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired,
           })
         ).isRequired,
       })

@@ -14,6 +14,14 @@ export const CREATE_POKEMON_REQUEST = "CREATE_POKEMON_REQUEST";
 export const CREATE_POKEMON_SUCCESS = "CREATE_POKEMON_SUCCESS";
 export const CREATE_POKEMON_FAILURE = "CREATE_POKEMON_FAILURE";
 
+export const UPDATE_POKEMON_REQUEST = "UPDATE_POKEMON_REQUEST";
+export const UPDATE_POKEMON_SUCCESS = "UPDATE_POKEMON_SUCCESS";
+export const UPDATE_POKEMON_FAILURE = "UPDATE_POKEMON_FAILURE";
+
+export const DELETE_POKEMON_REQUEST = "DELETE_POKEMON_REQUEST";
+export const DELETE_POKEMON_SUCCESS = "DELETE_POKEMON_SUCCESS";
+export const DELETE_POKEMON_FAILURE = "DELETE_POKEMON_FAILURE";
+
 let BASE_URL = "http://localhost:3001"
 
 export function getPokemons(){
@@ -68,6 +76,66 @@ export function getPokeIdDetail(id) {
             type: "GET_POKE_ID_DETAIL",
             payload: response.data
         })
+    };
+}
+
+export function updatePokemon(pokemonData) {
+    return async function(dispatch) {
+        dispatch({ 
+            type: "UPDATE_POKEMON_REQUEST"
+        });
+
+        try {
+            const payload = {
+                ...pokemonData,
+                types: pokemonData.types.map(type => type.name || type.tipo) 
+            };
+            console.log('Payload para la actualización:', payload);
+
+            const response = await axios.put(`${BASE_URL}/pokemon/${payload.id}`, payload);
+            dispatch({
+                type: "CREATE_POKEMON_SUCCESS",
+                payload: response.data
+            });
+
+            console.log('Respuesta de la actualización:', response.data);
+
+            dispatch({
+                type: "UPDATE_POKEMON_SUCCESS",
+                payload: response.data
+            });
+            return response.data;
+        } catch (error) {
+            dispatch({
+                type: "UPDATE_POKEMON_FAILURE",
+                payload: error.message
+            });
+            throw error;
+        }
+    };
+}
+
+
+
+export function deletePokemon(id) {
+    return async function(dispatch) {
+        dispatch({
+            type: "DELETE_POKEMON_REQUEST",
+        });
+
+        try {
+            await axios.delete(`${BASE_URL}/pokemon/${id}`);
+            dispatch({
+                type: "DELETE_POKEMON_SUCCESS",
+                payload: id
+            });
+        } catch (error) {
+            dispatch({
+                type: "DELETE_POKEMON_FAILURE",
+                payload: error.message
+            });
+            throw error;
+        }
     }
 }
 

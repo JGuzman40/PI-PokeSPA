@@ -8,7 +8,7 @@ const captitalizarName = (name) => {
 };
 
 function Card({ pokemon }) {
-    
+    const types = pokemon.types || []
     return (
         <Link to={`/home/${pokemon.id}`}>
         <div className='card_container'>
@@ -16,8 +16,8 @@ function Card({ pokemon }) {
             <img src={pokemon.imagen} alt={pokemon.name} className='pokemon_image' />
             
             <div className='pokemon_types'>
-                {pokemon.types.map((type, index) => (
-                    <span key={index} className='pokemon_type'>{type.tipo}</span>
+                {types.map((type, index) => (
+                    <span key={index} className='pokemon_type'>{type.name}</span>
                 ))}
             </div>
         </div>
@@ -38,7 +38,7 @@ Card.propTypes = {
         peso: PropTypes.number.isRequired,
         types: PropTypes.arrayOf(
             PropTypes.shape({
-                tipo: PropTypes.string.isRequired,
+                name: PropTypes.string.isRequired,
             })
         ).isRequired,
     }).isRequired,

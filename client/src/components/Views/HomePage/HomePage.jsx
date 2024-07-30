@@ -32,7 +32,7 @@ const HomePage = () => {
 
     if (typeFilter) {
       pokemons = pokemons.filter(pokemon =>
-        pokemon.types.some(type => type.tipo === typeFilter)
+        pokemon.types.some(type => type.name === typeFilter)
       );
     }
 
